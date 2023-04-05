@@ -1,0 +1,88 @@
+.card {
+    width: 400px;
+    height: 400px;
+    margin-top: 30px;
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+
+
+}
+
+.card .card-overlay {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 10
+}
+
+.card img.article-image {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+
+}
+
+
+.card img.love-icon {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    width: 50px;
+    height: 50px;
+
+}
+
+
+
+.card .card-content {
+    z-index: 100;
+    position: relative;
+    font-weight: bold;
+    padding: 10px;
+}
+
+.card .card-content>* {
+    margin-top: 10px;
+}
+
+
+
+.card .card-content h3 {
+    z-index: 100;
+    position: relative;
+    font-weight: bold;
+    font-size: 1.3rem;
+    text-transform: capitalize;
+}
+
+
+.card .details-btn {
+    padding: 10px 20px;
+    background-color: black;
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+.show-more {
+    margin-top: 40px;
+    padding: 10px 20px;
+    background-color: black;
+    color: white;
+    font-weight: bold;
+    font-size: 1.2rem;
+    border-radius: 5px;
+}
