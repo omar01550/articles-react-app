@@ -1,5 +1,6 @@
 import './football.css';
 import Card from '../../../../components/card/card';
+import Loder from '../../../../components/pageLoder/loder';
 import { useState, useEffect } from 'react';
 
 function Football() {
@@ -12,7 +13,11 @@ function Football() {
         const footballUrl = `https://newsapi.org/v2/everything?q=football&apiKey=${apiKey}`;
         fetch(footballUrl)
             .then((res) => res.json())
-            .then(data => setArticles(data.articles));
+            .then(data => {
+                data.articles.length = 8;
+                return data.articles;
+            })
+            .then(data => setArticles(data));
         // .then(data => console.log(data.articles));
 
 
@@ -26,7 +31,7 @@ function Football() {
             <div className="articles">
 
                 {
-                    articles.length != 0 ? articles.map(ele => <Card title={ele.title} image={ele.urlToImage} url={ele.url} />) : 'no data'
+                    articles.length != 0 ? articles.map(ele => <Card title={ele.title} image={ele.urlToImage} url={ele.url} />) : <Loder />
                 }
             </div>
 

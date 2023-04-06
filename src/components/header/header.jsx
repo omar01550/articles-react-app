@@ -3,7 +3,7 @@ import { useState } from "react";
 import NavMenu from "../navMenu/nav";
 import './header.css';
 import moonImage from '../../images/moon.png';
-import heartIamge from '../../images/saved-posts.png';
+import heartIamge from '../../images/heart.png';
 import BarsImage from '../../images/bars.png';
 
 
@@ -54,7 +54,11 @@ function Header() {
 
             </div>
 
-            <NavMenu displayNav={nav} setNav={setNav} nav={nav} />
+            <NavMenu
+                showNav={showNav}
+                setNav={setNav}
+                nav={nav}
+            />
 
 
 

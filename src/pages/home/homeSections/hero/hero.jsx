@@ -11,7 +11,7 @@ function Hero() {
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed hendrerit libero nec felis rhoncus
                     tincidunt.</p>
 
-                <Link to="/search" className="search-btn "><i className="fa fa-search"></i></Link>
+                <Link to="/search" className="search-btn ">Search</Link>
 
             </div>
         </section>

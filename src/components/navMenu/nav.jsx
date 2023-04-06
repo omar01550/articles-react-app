@@ -16,14 +16,14 @@ import closerImage from '../../images/close-white.png'
 
 
 
-function NavMenu({ displayNav, setNav, nav }) {
+function NavMenu({ showNav, setNav, nav }) {
 
     return (
-        <div className={displayNav}>
+        <div className={nav}>
             <div className="nav" id="nav">
                 <div className="menu-head">
                     <h2 className="">articles</h2>
-                    <img src={closerImage} alt="notfound" className="closer pointer" />
+                    <img src={closerImage} alt="notfound" className="closer pointer" onClick={showNav} />
                 </div>
 
                 <ul>
@@ -110,10 +110,7 @@ function NavMenu({ displayNav, setNav, nav }) {
 
             </div>
 
-            <div className="close-nav " onClick={() => {
-
-                setNav('nav-menu')
-            }}>
+            <div className="close-nav " onClick={showNav}>
 
             </div>
 

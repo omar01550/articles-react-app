@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react';
 import './search.css';
 import Card from '../../components/card/card';
+import Loder from '../../components/pageLoder/loder';
 
 
 function SeachPage() {
 
     const [query, setQuery] = useState();
     const [articles, setArticles] = useState([]);
+    const [loading, setLoading] = useState('loading')
     const apiKey = "d6e13b09676346608115146fd709df84";
     const footballUrl = `https://newsapi.org/v2/everything?q=${query}&apiKey=${apiKey}`;
 

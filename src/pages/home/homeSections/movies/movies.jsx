@@ -1,5 +1,6 @@
 import './movies.css';
 import Card from '../../../../components/card/card';
+import Loder from '../../../../components/pageLoder/loder';
 import { useState, useEffect } from 'react';
 
 
@@ -15,7 +16,12 @@ function Movies() {
 
         fetch(moviesUrl)
             .then((res) => res.json())
-            .then(data => setArticles(data.articles));
+            .then(data => {
+                data.articles.length = 8;
+                return data.articles;
+            })
+
+            .then(data => setArticles(data));
 
 
 
@@ -31,7 +37,7 @@ function Movies() {
             <div className="articles">
                 {
 
-                    articles.length != 0 ? articles.map(ele => <Card title={ele.title} image={ele.urlToImage} url={ele.url} />) : 'no data'
+                    articles.length != 0 ? articles.map(ele => <Card title={ele.title} image={ele.urlToImage} url={ele.url} />) : <Loder />
 
                 }
 
