@@ -1,6 +1,7 @@
 import Hero from "./homeSections/hero/hero";
 import Football from "./homeSections/football/football";
 import Movies from "./homeSections/movies/movies";
+import { memo } from "react";
 
 function Home() {
     return (
@@ -14,4 +15,4 @@ function Home() {
     )
 }
 
-export default Home
+export default memo(Home)

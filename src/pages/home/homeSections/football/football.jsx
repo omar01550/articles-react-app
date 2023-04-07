@@ -1,7 +1,7 @@
 import './football.css';
 import Card from '../../../../components/card/card';
 import Loder from '../../../../components/pageLoder/loder';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, memo } from 'react';
 
 function Football() {
 
@@ -9,10 +9,29 @@ function Football() {
 
     const [articles, setArticles] = useState([]);
 
+    const [favs, setFavs] = useState(() => {
+        return (
+            window.localStorage.reactFavs != null && window.localStorage.reactFavs != undefined
+                ? JSON.parse(window.localStorage.reactFavs)
+                : []
+        )
+    });
+
+
+    useEffect(() => {
+        localStorage.reactFavs = JSON.stringify(favs);
+    }, [favs])
+
+
+
     useEffect(function () {
         const footballUrl = `https://newsapi.org/v2/everything?q=football&apiKey=${apiKey}`;
+
         fetch(footballUrl)
-            .then((res) => res.json())
+            .then(function (res) {
+                console.log(res)
+                return res.json()
+            })
             .then(data => {
                 data.articles.length = 8;
                 return data.articles;
@@ -31,7 +50,7 @@ function Football() {
             <div className="articles">
 
                 {
-                    articles.length != 0 ? articles.map(ele => <Card title={ele.title} image={ele.urlToImage} url={ele.url} />) : <Loder />
+                    articles.length != 0 ? articles.map(ele => <Card title={ele.title} image={ele.urlToImage} url={ele.url} favs={favs} setFavs={setFavs} />) : <Loder />
                 }
             </div>
 
@@ -42,4 +61,4 @@ function Football() {
     );
 }
 
-export default Football;
+export default memo(Football);

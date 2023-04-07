@@ -1,5 +1,6 @@
 import './hero.css';
 import { Link } from 'react-router-dom';
+import { memo } from 'react';
 
 
 function Hero() {
@@ -19,4 +20,4 @@ function Hero() {
     );
 }
 
-export default Hero;
+export default memo(Hero);

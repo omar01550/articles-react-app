@@ -4,10 +4,6 @@
     --border-square-color: #fdf411;
 }
 
-body {
-    margin: 0;
-    padding: 0;
-}
 
 .section-loading {
     min-height: 50vh;
@@ -21,7 +17,7 @@ body {
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
-    background-color: #262626;
+    background-color: rgba(0, 0, 0, .25);
 }
 
 .section-loading .load {

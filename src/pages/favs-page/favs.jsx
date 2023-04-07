@@ -4,20 +4,17 @@ import { useEffect, useState } from 'react';
 
 function FvasPage() {
 
-    const [favs, setFavs] = useState([]);
+    const [favs, setFavs] = useState(() => {
+        return (
+            window.localStorage.reactFavs != null && window.localStorage.reactFavs != undefined
+                ? JSON.parse(window.localStorage.reactFavs)
+                : []
+        )
+    });
 
-
-    useEffect(function () {
-        const FavsPosition = window.localStorage.getItem("afvsArticlesReact");
-
-        if (!(FavsPosition == undefined || FavsPosition == null)) {
-            setFavs(JSON.parse(FavsPosition));
-        }
-
-        // Warning: Maximum update depth exceeded. This can happen when a component calls setState inside useEffect, but useEffect either doesn't have a dependency array, or one of the dependencies changes on every render.
-
-
-    }, [])
+    useEffect(() => {
+        localStorage.reactFavs = JSON.stringify(favs);
+    }, [favs])
 
     return (
         <main id="favs-page">
@@ -29,18 +26,16 @@ function FvasPage() {
                 {
                     favs.length != 0
                         ? favs.map(ele =>
-
                             <Card
                                 title={ele.title}
-                                id={ele.title}
-                                url={ele.url}
+                                id={ele.id}
                                 image={ele.urlToImage}
+                                url={ele.url}
                                 favs={favs}
                                 setFavs={setFavs}
                             />
-
                         )
-                        : 'no items in favs'
+                        : "no data"
                 }
 
             </div>

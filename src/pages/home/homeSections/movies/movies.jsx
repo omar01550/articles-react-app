@@ -1,7 +1,7 @@
 import './movies.css';
 import Card from '../../../../components/card/card';
 import Loder from '../../../../components/pageLoder/loder';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, memo } from 'react';
 
 
 function Movies() {
@@ -11,6 +11,21 @@ function Movies() {
     const moviesUrl = `https://newsapi.org/v2/everything?q=movies&apiKey=${apiKey}`;
 
     const [articles, setArticles] = useState([]);
+
+    const [favs, setFavs] = useState(() => {
+        return (
+            window.localStorage.reactFavs != null && window.localStorage.reactFavs != undefined
+                ? JSON.parse(window.localStorage.reactFavs)
+                : []
+        )
+    });
+
+
+    useEffect(() => {
+        localStorage.reactFavs = JSON.stringify(favs);
+    }, [favs])
+
+
 
     useEffect(function () {
 
@@ -37,7 +52,7 @@ function Movies() {
             <div className="articles">
                 {
 
-                    articles.length != 0 ? articles.map(ele => <Card title={ele.title} image={ele.urlToImage} url={ele.url} />) : <Loder />
+                    articles.length != 0 ? articles.map(ele => <Card title={ele.title} image={ele.urlToImage} url={ele.url} favs={favs} setFavs={setFavs} />) : <Loder />
 
                 }
 
@@ -47,4 +62,4 @@ function Movies() {
     );
 }
 
-export default Movies;
+export default memo(Movies);

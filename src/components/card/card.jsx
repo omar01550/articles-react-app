@@ -6,6 +6,30 @@ import { useRef } from 'react';
 
 function Card({ title, image, url, favs, setFavs }) {
 
+    function IsInFavs() {
+        return favs.filter(ele => ele.title == title).length != 0 ? true : false
+    }
+
+    function AddToFavs() {
+        setFavs([...favs, { title: title, urlToImage: image, url: url }])
+    }
+
+    function RemoveFRomFavs() {
+        setFavs(favs.filter(ele => ele.title != title));
+    }
+
+    function handelHeartImg() {
+        return (
+            IsInFavs()
+                ? heartImage
+                : EmptyHeart
+        )
+    }
+
+
+
+
+
 
 
 
@@ -21,7 +45,14 @@ function Card({ title, image, url, favs, setFavs }) {
         }}>
 
             <div class="card-overlay"></div>
-            <img class="love-icon" src={EmptyHeart} alt="not found" />
+            <img class="love-icon" src={handelHeartImg()} alt="not found" onClick={function () {
+                if (IsInFavs()) {
+                    RemoveFRomFavs()
+                } else {
+                    AddToFavs()
+                }
+
+            }} />
             <img src="" alt="" class="article-image" />
             <div class="card-content">
                 <h3 class="card-title">{title}</h3>
