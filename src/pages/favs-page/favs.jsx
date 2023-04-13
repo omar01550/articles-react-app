@@ -1,19 +1,15 @@
 import './favs.css';
 import Card from '../../components/card/card.jsx';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
+import { favsContext } from '../../App';
 
 function FvasPage() {
 
-    const [favs, setFavs] = useState(() => {
-        return (
-            window.localStorage.reactFavs != null && window.localStorage.reactFavs != undefined
-                ? JSON.parse(window.localStorage.reactFavs)
-                : []
-        )
-    });
+    const [favs, setFavs] = useContext(favsContext);
 
     useEffect(() => {
         localStorage.reactFavs = JSON.stringify(favs);
+
     }, [favs])
 
     return (

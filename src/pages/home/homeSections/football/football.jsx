@@ -1,26 +1,21 @@
 import './football.css';
 import Card from '../../../../components/card/card';
 import Loder from '../../../../components/pageLoder/loder';
-import { useState, useEffect, memo } from 'react';
+import { favsContext } from '../../../../App';
+import { useState, useEffect, memo, useContext } from 'react';
 
 function Football() {
 
-    const apiKey = "d6e13b09676346608115146fd709df84";
+    const apiKey = "a4b3c64fae0b42f6925028eff0511cae";
 
     const [articles, setArticles] = useState([]);
-
-    const [favs, setFavs] = useState(() => {
-        return (
-            window.localStorage.reactFavs != null && window.localStorage.reactFavs != undefined
-                ? JSON.parse(window.localStorage.reactFavs)
-                : []
-        )
-    });
-
+    const [favs, setFavs] = useContext(favsContext);
 
     useEffect(() => {
         localStorage.reactFavs = JSON.stringify(favs);
+
     }, [favs])
+
 
 
 
@@ -40,7 +35,7 @@ function Football() {
         // .then(data => console.log(data.articles));
 
 
-    }, [articles])
+    }, [])
 
 
 
@@ -50,7 +45,7 @@ function Football() {
             <div className="articles">
 
                 {
-                    articles.length != 0 ? articles.map(ele => <Card title={ele.title} image={ele.urlToImage} url={ele.url} favs={favs} setFavs={setFavs} />) : <Loder />
+                    articles.length != 0 ? articles.map(ele => <Card title={ele.title} image={ele.urlToImage} url={ele.url} favs={favs} setFavs={setFavs} />) : <Loder loading={true} />
                 }
             </div>
 
