@@ -34,13 +34,13 @@ function Header({ favsLength }) {
 
 
             <div className="logo">
-                <h1>ARTICLES</h1>
+                <h1>NEWS</h1>
             </div>
 
 
 
 
-            <img src={moonImage} alt="not found moon" className="moon" />
+            {/*<img src={moonImage} alt="not found moon" className="moon" />*/}
 
             <div className="header-icon">
                 <Link className="favs-link" to="/favs">

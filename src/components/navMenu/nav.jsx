@@ -22,7 +22,7 @@ function NavMenu({ showNav, setNav, nav }) {
         <div className={nav}>
             <div className="nav" id="nav">
                 <div className="menu-head">
-                    <h2 className="">articles</h2>
+                    <h2 className="">NEWS</h2>
                     <img src={closerImage} alt="notfound" className="closer pointer" onClick={showNav} />
                 </div>
 
@@ -44,13 +44,7 @@ function NavMenu({ showNav, setNav, nav }) {
                         </Link>
                     </li>
 
-                    <li>
-                        <Link to="/about">
 
-                            <img src={About} alt="not found" className="nav-icon" />
-                            <p>about</p>
-                        </Link>
-                    </li>
 
                     <li>
                         <Link to="/sports">
@@ -59,12 +53,7 @@ function NavMenu({ showNav, setNav, nav }) {
                         </Link>
                     </li>
 
-                    <li>
-                        <Link to="/movies">
-                            <img src={MoviesImage} alt="not found" className="nav-icon" />
-                            <p>movies</p>
-                        </Link>
-                    </li>
+
 
                     <li>
                         <Link to="/coins">
@@ -80,25 +69,13 @@ function NavMenu({ showNav, setNav, nav }) {
                         </Link>
                     </li>
 
-                    <li>
-                        <Link to="/contact">
-                            <img src={EmailImage} alt="not found" className="nav-icon" />
-                            <p>contact</p>
-                        </Link>
-                    </li>
 
 
-                    <li>
-                        <Link to="/news">
-                            <img src={newsImage} alt="not found" className="nav-icon" />
-                            <p>news</p>
-                        </Link>
-                    </li>
 
 
 
                     <li>
-                        <Link to="health.html">
+                        <Link to="health">
                             <img src={HealthImage} alt="not found" className="nav-icon" />
                             <p>health</p>
                         </Link>

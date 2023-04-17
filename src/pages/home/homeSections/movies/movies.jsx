@@ -1,22 +1,30 @@
 import './movies.css';
 import Card from '../../../../components/card/card';
 import Loder from '../../../../components/pageLoder/loder';
+import { getFirestore, collection, addDoc, onSnapshot, query, limit, where, getDocs } from 'https://www.gstatic.com/firebasejs/9.19.1/firebase-firestore.js';
 import { useState, useEffect, memo, useContext } from 'react';
 import { favsContext } from '../../../../App';
+import { firebaseContext } from '../../../../index.js';
 
 
 function Movies() {
 
 
     const apiKey = "a4b3c64fae0b42f6925028eff0511cae";
-    const moviesUrl = `https://newsapi.org/v2/everything?q=movies&apiKey=${apiKey}`;
-
     const [articles, setArticles] = useState([]);
+    const firebaseApp = useContext(firebaseContext);
+    const db = getFirestore(firebaseApp);
+    const newsCollections = collection(db, 'news');
+
+    const q = query(newsCollections, where("type", "==", ["cenima", "films", "movies"]), limit(9))
+
+
 
 
 
 
     const [favs, setFavs] = useContext(favsContext);
+
 
     useEffect(() => {
         localStorage.reactFavs = JSON.stringify(favs);
@@ -31,15 +39,16 @@ function Movies() {
 
     useEffect(function () {
 
-        fetch(moviesUrl)
-            .then((res) => res.json())
-            .then(data => {
-                data.articles.length = 8;
-                return data.articles;
-            })
+        const docs = getDocs(q)
+            .then((result) => {
 
-            .then(data => setArticles(data));
 
+                setArticles(result.docs.map(ele => ele.data()))
+
+
+            }).catch((err) => {
+
+            });
 
 
     }, [])

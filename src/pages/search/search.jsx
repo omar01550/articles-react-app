@@ -2,15 +2,21 @@ import { useEffect, useRef, useState, useContext } from 'react';
 import './search.css';
 import Card from '../../components/card/card';
 import Loder from '../../components/pageLoder/loder';
+import { getFirestore, collection, addDoc, onSnapshot, query, limit, where, getDocs } from 'https://www.gstatic.com/firebasejs/9.19.1/firebase-firestore.js';
 import { favsContext } from '../../App';
-
+import { firebaseContext } from '../../index.js';
 
 function SeachPage() {
 
-    const [query, setQuery] = useState();
+    const [searchQuery, setSearchQuery] = useState();
     const [articles, setArticles] = useState([]);
     const [loading, setLoading] = useState(false)
     const searchInput = useRef()
+    const firebaseApp = useContext(firebaseContext);
+    const db = getFirestore(firebaseApp);
+    const newsCollections = collection(db, 'news');
+
+
 
 
 
@@ -26,17 +32,32 @@ function SeachPage() {
     }, [favs])
 
 
-    const apiKey = "a4b3c64fae0b42f6925028eff0511cae";
-    const footballUrl = `https://newsapi.org/v2/everything?q=${query}&apiKey=${apiKey}`;
+    useEffect(() => {
+        console.log(searchQuery);
+    }, [searchQuery])
+
 
     async function getData() {
-        setLoading(true)
-        let response = await fetch(footballUrl);
-        console.log(response.status);
-        let resJson = await response.json();
-        let articles = resJson.articles;
 
-        setArticles(articles);
+
+        setLoading(true)
+        console.log(searchQuery);
+        const q = query(newsCollections, where("type", "==", "[coins]"))
+        const docs = getDocs(q)
+
+            .then((result) => {
+
+                console.log(result);
+                setArticles(result.docs.map(ele => ele.data()))
+
+
+            }).catch((err) => {
+
+            });
+        console.log(searchQuery);
+
+
+        // setArticles(articles);
         setLoading(false);
 
     }
@@ -46,12 +67,12 @@ function SeachPage() {
     return (
         <main class="search-page">
             <form id="search-form">
-                <input type="text" id="search-box" placeholder="Search..." onKeyUp={e => { setQuery(e.target.value) }} ref={searchInput} />
+                <input type="text" id="search-box" placeholder="Search..." ref={searchInput} />
                 <button id="search-btn" onClick={e => {
-                    setArticles([])
-                    searchInput.current.value = '';
+                    setSearchQuery(searchInput.current.value)
 
-                    e.preventDefault()
+                    e.preventDefault();
+
                     getData()
                 }}>Search</button>
 
